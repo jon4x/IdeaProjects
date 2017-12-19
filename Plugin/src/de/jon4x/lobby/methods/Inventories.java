@@ -10,7 +10,7 @@ import org.bukkit.inventory.Inventory;
 
 public class Inventories {
 
-    public static void openCompass(Player p) {
+    public static Inventory openCompass(Player p) {
         Inventory teleporter = Bukkit.createInventory(null, 9*5, "§8× §6Navigator §7»");
         p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.8f);
         Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
@@ -97,8 +97,15 @@ public class Inventories {
             teleporter.setItem(41, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§b§lTeam", null));
             p.playSound(p.getLocation(), Sound.WOOD_CLICK, 0.5f, 0.8f);
         },18);
-        p.openInventory(teleporter);
+
+        return teleporter;
     }
 
 
+    public static Inventory openSettings(Player p) {
+        Inventory settings = Bukkit.createInventory(null, 9*5, "§8× §aEinstellungen §7»");
+        p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.8f);
+
+        return settings;
+    }
 }

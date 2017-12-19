@@ -20,6 +20,7 @@ public class PlayerJoin implements Listener {
             p.teleport(main.getInstance().getSpawn());
         }
 
+        p.getWorld().setThundering(false);
         p.getInventory().clear();
         p.setHealth(20.0);
         p.setHealthScale(6.0);
@@ -29,7 +30,11 @@ public class PlayerJoin implements Listener {
 
         p.getInventory().setItem(0, ItemManager.createItem(Material.COMPASS, 1, 0, "§8× §6Navigator §7(Rechtsklick)", null));
         p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 10,"§8× §cSpieler §8» §aAlle sichtbar §7(Rechtsklick)", null));
-        p.getInventory().setItem(7, ItemManager.createItem(Material.REDSTONE_COMPARATOR, 1,0, "§8× §eEinstellungen §7(Rechtsklick)", null));
+
+        if (p.hasPermission("vip"))
+            p.getInventory().setItem(4, ItemManager.createItem(Material.TNT, 1, 0, "§8× §5VIP-Einstellungen §7(Rechtsklick)", null));
+
+        p.getInventory().setItem(7, ItemManager.createItem(Material.REDSTONE_COMPARATOR, 1,0, "§8× §aEinstellungen §7(Rechtsklick)", null));
         p.getInventory().setItem(8, ItemManager.createSkull(Material.SKULL_ITEM, 1, p.getName(), "§8× §eProfil §7(Rechtsklick)", null));
     }
 }
