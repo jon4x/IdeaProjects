@@ -1,0 +1,8 @@
+main: de.jon4x.gewinnspiel.main
+author: jon4x
+name: Gewinnspiel
+version: 1.0
+
+commands:
+   gewinnspiel:
+     description: Pick a random player and give him coins.

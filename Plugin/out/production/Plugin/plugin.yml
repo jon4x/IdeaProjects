@@ -1,0 +1,13 @@
+main: de.jon4x.lobby.main
+name: LobbySystem
+version: 1.0
+author: jon4x
+description: LobbySystem Plugin!
+
+commands:
+   gm:
+      permission: admin
+      description: Set your Gamemode!
+   build:
+      permission: admin
+      description: Set your BuildMode!
