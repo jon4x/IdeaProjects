@@ -51,7 +51,6 @@ public class main extends JavaPlugin {
         pm.registerEvents(new Gadgets(), this);
         pm.registerEvents(new HidePlayers(), this);
         pm.registerEvents(new PlayerQuit(), this);
-        pm.registerEvents(new PlayerChat(), this);
         pm.registerEvents(new PlayerJoin(), this);
         pm.registerEvents(new Protect(), this);
     }
