@@ -16,13 +16,12 @@ public class main extends JavaPlugin {
 
     private static main instance;
     private Set<UUID> BuildList;
-    private Set<UUID> HideList;
     private Set<UUID> FlyList;
     private Set<UUID> JumpPads;
     private Set<UUID> DoubleJump;
     private Set<UUID> ChatDisable;
     private Location Spawn;
-    private static String prefix = "§e§lKeinPlan.. §8\u258f ";
+    private static String prefix = "§8» §6Lobby §8× ";
 
     public static String getPrefix() {
         return prefix;
@@ -32,7 +31,7 @@ public class main extends JavaPlugin {
     public void onEnable() {
         Spawn = new Location(getServer().getWorld("world"), 60, 90.0, 45);
         instance = this;
-        FlyList = Sets.newHashSet(); BuildList = Sets.newHashSet(); HideList = Sets.newHashSet(); JumpPads = Sets.newHashSet(); DoubleJump = Sets.newHashSet(); ChatDisable = Sets.newHashSet();
+        FlyList = Sets.newHashSet(); BuildList = Sets.newHashSet(); JumpPads = Sets.newHashSet(); DoubleJump = Sets.newHashSet(); ChatDisable = Sets.newHashSet();
 
         Bukkit.getConsoleSender().sendMessage(getPrefix() + "§7Plugin wurde erfolgreich gestartet!");
 
@@ -42,12 +41,10 @@ public class main extends JavaPlugin {
 
         // Register Events
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new Premium(), this);
         pm.registerEvents(new JumpPads(), this);
         pm.registerEvents(new DoubleJump(), this);
         pm.registerEvents(new Profil(), this);
         pm.registerEvents(new Teleporter(), this);
-        pm.registerEvents(new Fly(), this);
         pm.registerEvents(new Gadgets(), this);
         pm.registerEvents(new HidePlayers(), this);
         pm.registerEvents(new PlayerQuit(), this);
@@ -66,10 +63,6 @@ public class main extends JavaPlugin {
 
     public Set<UUID> getBuildList() {
         return BuildList;
-    }
-
-    public Set<UUID> getHideList() {
-        return HideList;
     }
 
     public Set<UUID> getFlyList() {
@@ -91,4 +84,5 @@ public class main extends JavaPlugin {
     public Set<UUID> getChatDisable() {
         return ChatDisable;
     }
+
 }

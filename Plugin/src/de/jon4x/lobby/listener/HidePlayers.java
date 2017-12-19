@@ -23,42 +23,55 @@ public class HidePlayers implements Listener {
     @EventHandler
     public void onHidePlayers (PlayerInteractEvent e) {
 
-        int cooldownTime = 5;
+        int cooldownTime = 2;
         Player p = e.getPlayer();
         ItemStack i = p.getItemInHand();
 
         if (cooldown.containsKey(p.getUniqueId())) {
             long secondsLeft = ((cooldown.get(p.getUniqueId())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
             if (secondsLeft > 0) {
-                p.sendMessage(main.getInstance().getPrefix() + "§7Bitte warte 5 §7Sekunden!");
+                p.sendMessage(main.getInstance().getPrefix() + "§cBitte habe einen moment Geduld!");
                 return;
             }
         }
 
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (ItemManager.get(i, Material.GLOWSTONE_DUST, "§e§lSpieler §7§l\u279f §a§lAN §7(Rechtsklick)")) {
+            if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §aAlle sichtbar §7(Rechtsklick)")) {
                 cooldown.put(p.getUniqueId(), System.currentTimeMillis());
 
-                p.playSound(p.getLocation(), Sound.LEVEL_UP, 0.2f, 0.2f);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 10));
-                p.getInventory().setItem(6, ItemManager.createItem(Material.SULPHUR, 1, 0, "§e§lSpieler §7§l\u279f §c§lAUS §7(Rechtsklick)", null));
-                p.sendMessage(main.getInstance().getPrefix() + "§7Alle Spieler sind nun §cunsichtbar");
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 13, "§8× §cSpieler §8» §5VIP's sichtbar §7(Rechtsklick)", null));
+                p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun nurnoch §5VIP §7Spieler!");
+                for (Player all : main.getInstance().getServer().getOnlinePlayers()) {
+                    p.hidePlayer(all);
+                    if (all.hasPermission("vip")) {
+                        p.showPlayer(all);
+                    }
+                }
+            }
+            else if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §5VIP's sichtbar §7(Rechtsklick)")) {
+                cooldown.put(p.getUniqueId(), System.currentTimeMillis());
+
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 1, "§8× §cSpieler §8» §cKeine sichtbar §7(Rechtsklick)", null));
+                p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun §ckeine §7Spieler mehr!");
                 for (Player all : main.getInstance().getServer().getOnlinePlayers()) {
                     p.hidePlayer(all);
                 }
-                main.getInstance().getHideList().add(p.getUniqueId());
             }
-            else if (ItemManager.get(i, Material.SULPHUR, "§e§lSpieler §7§l\u279f §c§lAUS §7(Rechtsklick)")) {
+
+            else if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §cKeine sichtbar §7(Rechtsklick)")) {
                 cooldown.put(p.getUniqueId(), System.currentTimeMillis());
 
-                p.playSound(p.getLocation(), Sound.LEVEL_UP, 0.2f, 0.2f);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 10));
-                p.getInventory().setItem(6, ItemManager.createItem(Material.GLOWSTONE_DUST, 1, 0, "§e§lSpieler §7§l\u279f §a§lAN §7(Rechtsklick)", null));
-                p.sendMessage(main.getInstance().getPrefix() + "§7Alle Spieler sind nun §asichtbar");
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 10, "§8× §cSpieler §8» §aAlle sichtbar §7(Rechtsklick)", null));
+                p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun wieder §aalle §7Spieler!");
                 for (Player all : main.getInstance().getServer().getOnlinePlayers()) {
                     p.showPlayer(all);
                 }
-                main.getInstance().getHideList().remove(p.getUniqueId());
             }
         }
     }
