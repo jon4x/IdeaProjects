@@ -4,9 +4,9 @@ import de.jon4x.lobby.itemmanager.ItemManager;
 import de.jon4x.lobby.main;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoin implements Listener {

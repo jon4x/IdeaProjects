@@ -1,9 +1,12 @@
 package de.jon4x.lobby.itemmanager;
 
-import org.bukkit.inventory.*;
-import org.bukkit.*;
-import java.util.*;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemManager {
 

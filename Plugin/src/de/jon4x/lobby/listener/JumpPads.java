@@ -1,13 +1,12 @@
 package de.jon4x.lobby.listener;
 
-import de.jon4x.lobby.main;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class JumpPads implements Listener {
