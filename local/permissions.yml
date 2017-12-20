@@ -1,0 +1,9 @@
+default:
+       description: Basic permissions.
+       default: true
+       children:
+          bukkit.command.help: false
+          minecraft.command.help: false
+          minecraft.command.tell: false
+          bukkit.command.plugins: false
+          bukkit.command.version: false
