@@ -11,10 +11,15 @@ public class PlayerQuit implements Listener {
     @EventHandler
     public void QuitMessage(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+
         if (main.getInstance().getBuildList().contains(p.getUniqueId()))
             main.getInstance().getBuildList().remove(p.getUniqueId());
         if (main.getInstance().getFlyList().contains(p.getUniqueId()))
             main.getInstance().getFlyList().remove(p.getUniqueId());
+        if (main.getInstance().getTeleporter().contains(p.getUniqueId()))
+            main.getInstance().getTeleporter().remove(p.getUniqueId());
+        if (main.getInstance().getSettings().contains(p.getUniqueId()))
+            main.getInstance().getSettings().remove(p.getUniqueId());
 
         e.setQuitMessage("§c§l - §7" + p.getName());
     }

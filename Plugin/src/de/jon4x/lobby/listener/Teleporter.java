@@ -11,10 +11,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import static de.jon4x.lobby.methods.Inventories.openCompass;
+import static de.jon4x.lobby.methods.Teleport.doTeleport;
 
 public class Teleporter implements Listener {
 
@@ -24,9 +24,14 @@ public class Teleporter implements Listener {
         ItemStack i = p.getItemInHand();
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (ItemManager.get(i, Material.COMPASS, "§8× §6Navigator §7(Rechtsklick)")) {
-                Inventory teleporter = openCompass(p);
-                p.openInventory(teleporter);
+                openCompass(p);
             }
+            else {
+                return;
+            }
+        }
+        else {
+            return;
         }
     }
 
@@ -34,25 +39,31 @@ public class Teleporter implements Listener {
     public void onNavigatorClick (InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         ItemStack i = e.getCurrentItem();
-        Inventory teleporter = openCompass(p);
 
         if (e.getClickedInventory() != null) {
 
-            if (e.getClickedInventory().getName().equalsIgnoreCase("§8× §6Navigator §7»")) {
+            if (e.getClickedInventory().getName().equalsIgnoreCase("§8× §6§lNavigator §8»")) {
                 if (i != null) {
                     if (i.getType() == Material.AIR)
                         return;
 
                     else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§e§lSpawn")) {
-                        p.teleport(main.getInstance().getSpawn());
-                        p.playSound(main.getInstance().getSpawn(), Sound.ENDERMAN_TELEPORT, 0.5f, 0.8f);
-                        p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 1);
+                        doTeleport(main.getInstance().getSpawn(), p);
                     }
 
                     else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eBed Wars")) {
-                        p.playSound(p.getLocation(), Sound.ANVIL_USE, 0.5f, 0.1f);
-                        teleporter.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 0, " ", null));
+                        p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
+                        p.closeInventory();
                     }
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eKnockout")) {
+                        p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
+                        p.closeInventory();
+                    }
+                    else if (i.getType() == Material.BARRIER) {
+                        p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
+                        p.closeInventory();
+                    }
+
                 }
             }
 

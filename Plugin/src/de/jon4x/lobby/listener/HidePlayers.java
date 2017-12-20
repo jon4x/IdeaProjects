@@ -39,8 +39,8 @@ public class HidePlayers implements Listener {
             if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §aAlle sichtbar §7(Rechtsklick)")) {
                 cooldown.put(p.getUniqueId(), System.currentTimeMillis());
 
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 0.5f, 1.5f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 10));
                 p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 13, "§8× §cSpieler §8» §5VIP's sichtbar §7(Rechtsklick)", null));
                 p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun nurnoch §5VIP §7Spieler!");
                 for (Player all : main.getInstance().getServer().getOnlinePlayers()) {
@@ -53,8 +53,8 @@ public class HidePlayers implements Listener {
             else if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §5VIP's sichtbar §7(Rechtsklick)")) {
                 cooldown.put(p.getUniqueId(), System.currentTimeMillis());
 
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 0.5f, 1.5f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 10));
                 p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 1, "§8× §cSpieler §8» §cKeine sichtbar §7(Rechtsklick)", null));
                 p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun §ckeine §7Spieler mehr!");
                 for (Player all : main.getInstance().getServer().getOnlinePlayers()) {
@@ -65,8 +65,8 @@ public class HidePlayers implements Listener {
             else if (ItemManager.get(i, Material.INK_SACK, "§8× §cSpieler §8» §cKeine sichtbar §7(Rechtsklick)")) {
                 cooldown.put(p.getUniqueId(), System.currentTimeMillis());
 
-                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f, 0.1f);
-                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 23, 10));
+                p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 0.5f, 1.5f);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 15, 10));
                 p.getInventory().setItem(1, ItemManager.createItem(Material.INK_SACK, 1, 10, "§8× §cSpieler §8» §aAlle sichtbar §7(Rechtsklick)", null));
                 p.sendMessage(main.getInstance().getPrefix() + "§7Du siehst nun wieder §aalle §7Spieler!");
                 for (Player all : main.getInstance().getServer().getOnlinePlayers()) {

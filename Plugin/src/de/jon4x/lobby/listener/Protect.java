@@ -97,6 +97,9 @@ public class Protect implements Listener {
 
     @EventHandler
     public void onWeather(WeatherChangeEvent e) {
+        if (e.getWorld().getName().equalsIgnoreCase("world")) {
+            e.getWorld().setThundering(false);
+        }
         e.setCancelled(true);
     }
 
