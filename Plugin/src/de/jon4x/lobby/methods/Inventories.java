@@ -286,4 +286,130 @@ public class Inventories {
         }
         p.openInventory(settings);
     }
+
+    public static void openYTSettings(Player p) {
+        Inventory ytSettings = Bukkit.createInventory(null, 9*4, "§8× §5§lVIP-Einstellungen §8»");
+
+        if (main.getInstance().getYtSettings().contains(p.getUniqueId())) {
+            ytSettings.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(6, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(0 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(8 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(1 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(7 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(3 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(5 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(0 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(8 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(1 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(7 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(3 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(5 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            ytSettings.setItem(0 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(8 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(1 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(7 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(2 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(6 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(3 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(5 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(4 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", null));
+            ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", null));
+            ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", null));
+            ytSettings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            ytSettings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            ytSettings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            p.playSound(p.getLocation(), Sound.CLICK, 0.2f, 0.5f);
+        }
+
+        else {
+            main.getInstance().getYtSettings().add(p.getUniqueId());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 1);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 2);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(6, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 3);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 4);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 5);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(0 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(8 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+
+                ytSettings.setItem(1 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(7 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(3 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(5 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 6);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(0 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(8 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+
+                ytSettings.setItem(1 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(7 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(3 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                ytSettings.setItem(5 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 7);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(0 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(8 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 8);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(1 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(7 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 9);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(2 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(6 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 10);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(3 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                ytSettings.setItem(5 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 11);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(4 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 12);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", null));
+                ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", null));
+                ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", null));
+                ytSettings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                ytSettings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                ytSettings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                p.playSound(p.getLocation(), Sound.WOOD_CLICK, 0.5f, 0.8f);
+            }, 15);
+        }
+        p.openInventory(ytSettings);
+    }
 }

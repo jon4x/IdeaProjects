@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import static de.jon4x.coinapi.CoinAPI.setCoins;
+
 public class PlayerJoin implements Listener {
 
     @EventHandler
@@ -18,6 +20,7 @@ public class PlayerJoin implements Listener {
 
         if (!p.hasPlayedBefore()) {
             p.teleport(main.getInstance().getSpawn());
+            setCoins(p.getUniqueId().toString(), 100);
         }
 
         p.getWorld().setThundering(false);

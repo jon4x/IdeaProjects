@@ -20,7 +20,7 @@ public class main extends JavaPlugin {
     private Set<UUID> JumpPads;
     private Set<UUID> DoubleJump;
     private Set<UUID> ChatDisable;
-    private Set<UUID> Teleporter, Settings;
+    private Set<UUID> Teleporter, Settings, ytSettings;
     private Location Spawn;
     private static String prefix = "§8» §6Lobby §8× ";
 
@@ -32,7 +32,7 @@ public class main extends JavaPlugin {
     public void onEnable() {
         Spawn = new Location(getServer().getWorld("world"), 60, 90.0, 45);
         instance = this;
-        Settings = Sets.newHashSet(); Teleporter = Sets.newHashSet(); FlyList = Sets.newHashSet(); BuildList = Sets.newHashSet(); JumpPads = Sets.newHashSet(); DoubleJump = Sets.newHashSet(); ChatDisable = Sets.newHashSet();
+        ytSettings = Sets.newHashSet(); Settings = Sets.newHashSet(); Teleporter = Sets.newHashSet(); FlyList = Sets.newHashSet(); BuildList = Sets.newHashSet(); JumpPads = Sets.newHashSet(); DoubleJump = Sets.newHashSet(); ChatDisable = Sets.newHashSet();
 
         Bukkit.getConsoleSender().sendMessage(getPrefix() + "§7Plugin wurde erfolgreich gestartet!");
 
@@ -93,5 +93,9 @@ public class main extends JavaPlugin {
 
     public Set<UUID> getSettings() {
         return Settings;
+    }
+
+    public Set<UUID> getYtSettings() {
+        return ytSettings;
     }
 }

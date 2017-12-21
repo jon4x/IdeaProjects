@@ -20,6 +20,8 @@ public class PlayerQuit implements Listener {
             main.getInstance().getTeleporter().remove(p.getUniqueId());
         if (main.getInstance().getSettings().contains(p.getUniqueId()))
             main.getInstance().getSettings().remove(p.getUniqueId());
+        if (main.getInstance().getYtSettings().contains(p.getUniqueId()))
+            main.getInstance().getYtSettings().remove(p.getUniqueId());
 
         e.setQuitMessage("§c§l - §7" + p.getName());
     }
