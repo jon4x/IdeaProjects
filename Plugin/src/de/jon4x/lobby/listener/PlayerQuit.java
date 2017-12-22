@@ -22,6 +22,10 @@ public class PlayerQuit implements Listener {
             main.getInstance().getSettings().remove(p.getUniqueId());
         if (main.getInstance().getYtSettings().contains(p.getUniqueId()))
             main.getInstance().getYtSettings().remove(p.getUniqueId());
+        if (main.getInstance().getChatDisabled().contains(p.getUniqueId()))
+            main.getInstance().getChatDisabled().remove(p.getUniqueId());
+        if (main.getInstance().getProfil().contains(p.getUniqueId()))
+            main.getInstance().getProfil().remove(p.getUniqueId());
 
         e.setQuitMessage("§c§l - §7" + p.getName());
     }

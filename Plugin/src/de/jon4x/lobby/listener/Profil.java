@@ -14,16 +14,17 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class Profil implements Listener {
+import static de.jon4x.lobby.methods.Inventories.openProfil;
 
-    Inventory profil = Bukkit.createInventory(null, 9*1, "§e§lProfil §7»");
+public class Profil implements Listener {
 
     @EventHandler
     public void onOpenProfil (PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack i = p.getItemInHand();
         if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (ItemManager.get(i, Material.SKULL_ITEM, "§e§lProfil §7(Rechtsklick)")) {
+            if (ItemManager.get(i, Material.SKULL_ITEM, "§8× §eProfil §7(Rechtsklick)")) {
+                openProfil(p);
             }
             else {
                 return;

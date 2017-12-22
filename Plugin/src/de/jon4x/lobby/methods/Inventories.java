@@ -1,5 +1,7 @@
 package de.jon4x.lobby.methods;
 
+import de.jon4x.lobby.api.DoublejumpAPI;
+import de.jon4x.lobby.api.JumppadAPI;
 import de.jon4x.lobby.itemmanager.ItemManager;
 import de.jon4x.lobby.main;
 import org.bukkit.Bukkit;
@@ -7,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+
+import java.util.ArrayList;
 
 public class Inventories {
 
@@ -52,11 +56,11 @@ public class Inventories {
             teleporter.setItem(22, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
             teleporter.setItem(23, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
             teleporter.setItem(24, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
-            teleporter.setItem(4 + 9 * 4, ItemManager.createItem(Material.MAGMA_CREAM, 1, 0, "§e§lSpawn", null));
-            teleporter.setItem(1 + 9 * 2, ItemManager.createItem(Material.BARRIER, 1, 0, "§c§oBald..", null));
+            teleporter.setItem(4 + 9 * 4, ItemManager.createItem(Material.MAGMA_CREAM, 1, 0, "§b§lSpawn", null));
+            teleporter.setItem(1 + 9 * 2, ItemManager.createItem(Material.IRON_SWORD, 1, 0, "§eQSG", null));
             teleporter.setItem(7 + 9 * 2, ItemManager.createItem(Material.BARRIER, 1, 0, "§c§oBald..", null));
             teleporter.setItem(3 + 9, ItemManager.createItem(Material.STICK, 1, 0, "§eKnockout", null));
-            teleporter.setItem(5 + 9, ItemManager.createItem(Material.BED, 1, 0, "§eBed Wars", null));
+            teleporter.setItem(5 + 9, ItemManager.createItem(Material.BED, 1, 0, "§eBedWars", null));
             teleporter.setItem(39, ItemManager.createItem(Material.STORAGE_MINECART, 1, 0, "§6Tägliche Belohnung", null));
             teleporter.setItem(41, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§6Team", null));
             p.playSound(p.getLocation(), Sound.CLICK, 0.2f, 0.5f);
@@ -148,12 +152,12 @@ public class Inventories {
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
             }, 15);
             Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
-                teleporter.setItem(1 + 9 * 2, ItemManager.createItem(Material.BARRIER, 1, 0, "§c§oBald..", null));
+                teleporter.setItem(1 + 9 * 2, ItemManager.createItem(Material.IRON_SWORD, 1, 0, "§eQSG", null));
                 teleporter.setItem(7 + 9 * 2, ItemManager.createItem(Material.BARRIER, 1, 0, "§c§oBald..", null));
                 teleporter.setItem(3 + 9, ItemManager.createItem(Material.STICK, 1, 0, "§eKnockout", null));
-                teleporter.setItem(5 + 9, ItemManager.createItem(Material.BED, 1, 0, "§eBed Wars", null));
+                teleporter.setItem(5 + 9, ItemManager.createItem(Material.BED, 1, 0, "§eBedWars", null));
                 teleporter.setItem(39, ItemManager.createItem(Material.STORAGE_MINECART, 1, 0, "§6Tägliche Belohnung", null));
-                teleporter.setItem(40, ItemManager.createItem(Material.MAGMA_CREAM, 1, 0, "§e§lSpawn", null));
+                teleporter.setItem(40, ItemManager.createItem(Material.MAGMA_CREAM, 1, 0, "§b§lSpawn", null));
                 teleporter.setItem(41, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§6Team", null));
                 p.playSound(p.getLocation(), Sound.WOOD_CLICK, 0.5f, 0.8f);
             }, 18);
@@ -197,10 +201,31 @@ public class Inventories {
             settings.setItem(4+9*3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
             settings.setItem(4+9, ItemManager.createItem(Material.FIREBALL, 1, 0, "§eDoubleJump", null));
             settings.setItem(2+9, ItemManager.createItem(Material.SIGN, 1, 0, "§9Chat", null));
-            settings.setItem(6+9, ItemManager.createItem(Material.GOLD_PLATE, 1, 0, "§6JumpPads", null));
-            settings.setItem(4+9*2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
-            settings.setItem(2+9*2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
-            settings.setItem(6+9*2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+            settings.setItem(6+9, ItemManager.createItem(Material.IRON_PLATE, 1, 0, "§7JumpPads", null));
+
+            // Chat
+            if (main.getInstance().getChatDisabled().contains(p.getUniqueId()))
+                settings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            else
+                settings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+
+            // Doublejump
+            if (DoublejumpAPI.getState(p.getUniqueId().toString()) == 0)
+                settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+            else if (DoublejumpAPI.getState(p.getUniqueId().toString()) == 1)
+                settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            else {
+                settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+            }
+
+            // Jumppad
+            if (JumppadAPI.getState(p.getUniqueId().toString()) == 0)
+                settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+            else if (JumppadAPI.getState(p.getUniqueId().toString()) == 1)
+                settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+            else {
+                settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+            }
             p.playSound(p.getLocation(), Sound.CLICK, 0.2f, 0.5f);
         }
 
@@ -277,10 +302,31 @@ public class Inventories {
             Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
                 settings.setItem(4 + 9, ItemManager.createItem(Material.FIREBALL, 1, 0, "§eDoubleJump", null));
                 settings.setItem(2 + 9, ItemManager.createItem(Material.SIGN, 1, 0, "§9Chat", null));
-                settings.setItem(6 + 9, ItemManager.createItem(Material.GOLD_PLATE, 1, 0, "§6JumpPads", null));
-                settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
-                settings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
-                settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+                settings.setItem(6 + 9, ItemManager.createItem(Material.IRON_PLATE, 1, 0, "§7JumpPads", null));
+
+                // Chat
+                if (main.getInstance().getChatDisabled().contains(p.getUniqueId()))
+                    settings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                else
+                    settings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+
+                // Doublejump
+                if (DoublejumpAPI.getState(p.getUniqueId().toString()) == 0)
+                    settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+                else if (DoublejumpAPI.getState(p.getUniqueId().toString()) == 1)
+                    settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                else {
+                    settings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+                }
+
+                // Jumppad
+                if (JumppadAPI.getState(p.getUniqueId().toString()) == 0)
+                    settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+                else if (JumppadAPI.getState(p.getUniqueId().toString()) == 1)
+                    settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
+                else {
+                    settings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 10, "§a✔ §8× §aAktiviert", null));
+                }
                 p.playSound(p.getLocation(), Sound.WOOD_CLICK, 0.5f, 0.8f);
             }, 15);
         }
@@ -289,7 +335,8 @@ public class Inventories {
 
     public static void openYTSettings(Player p) {
         Inventory ytSettings = Bukkit.createInventory(null, 9*4, "§8× §5§lVIP-Einstellungen §8»");
-
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§8\u27A5 §c§oIn arbeit..");
         if (main.getInstance().getYtSettings().contains(p.getUniqueId())) {
             ytSettings.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
             ytSettings.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
@@ -321,9 +368,9 @@ public class Inventories {
             ytSettings.setItem(3 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
             ytSettings.setItem(5 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
             ytSettings.setItem(4 + 9 * 3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
-            ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", null));
-            ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", null));
-            ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", null));
+            ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", lore));
+            ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", lore));
+            ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", lore));
             ytSettings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
             ytSettings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
             ytSettings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
@@ -401,9 +448,9 @@ public class Inventories {
                 p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
             }, 12);
             Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
-                ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", null));
-                ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", null));
-                ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", null));
+                ytSettings.setItem(4 + 9, ItemManager.createItem(Material.EXPLOSIVE_MINECART, 1, 0, "§cSilentlobby", lore));
+                ytSettings.setItem(2 + 9, ItemManager.createItem(Material.NAME_TAG, 1, 0, "§5Nickname", lore));
+                ytSettings.setItem(6 + 9, ItemManager.createItem(Material.ENDER_PEARL, 1, 0, "§9Schutzschild", lore));
                 ytSettings.setItem(4 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
                 ytSettings.setItem(2 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
                 ytSettings.setItem(6 + 9 * 2, ItemManager.createItem(Material.INK_SACK, 1, 1, "§c✘ §8× §cDeaktiviert", null));
@@ -411,5 +458,108 @@ public class Inventories {
             }, 15);
         }
         p.openInventory(ytSettings);
+    }
+
+    public static void openProfil (Player p) {
+        Inventory profil = Bukkit.createInventory(null, 9*3, "§8× §e§lProfil §8»");
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§8\u27A5 §c§oIn arbeit..");
+        if (main.getInstance().getProfil().contains(p.getUniqueId())) {
+            profil.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(6, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(0 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(8 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(6 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            profil.setItem(4 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            profil.setItem(2 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+            profil.setItem(0 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(8 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(1 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(7 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(2 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(6 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(3 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(5 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(4 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+            profil.setItem(1 + 9, ItemManager.createItem(Material.REDSTONE, 1, 0, "§cTrails", lore));
+            profil.setItem(3 + 9, ItemManager.createItem(Material.LEATHER_CHESTPLATE, 1, 0, "§9Kleiderschrank", lore));
+            profil.setItem(5 + 9, ItemManager.createItem(Material.PUMPKIN, 1, 0, "§eKöpfe", lore));
+            profil.setItem(7 + 9, ItemManager.createItem(Material.GOLD_BOOTS, 1, 0, "§6Schuhe", lore));
+            p.playSound(p.getLocation(), Sound.CLICK, 0.2f, 0.5f);
+        }
+        else {
+            main.getInstance().getProfil().add(p.getUniqueId());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(4, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 1);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(3, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(5, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 2);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(6, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 3);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(1, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(7, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 4);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(0, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(8, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 5);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(0 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(8 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(6 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                profil.setItem(4 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                profil.setItem(2 + 9, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 7, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 6);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(0 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(8 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 7);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(1 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(7 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 8);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(2 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(6 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 9);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(3 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                profil.setItem(5 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 10);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(4 + 9 * 2, ItemManager.createItem(Material.STAINED_GLASS_PANE, 1, 14, " ", null));
+                p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 0.2f, 0.5f);
+            }, 11);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(main.getInstance(), () -> {
+                profil.setItem(1 + 9, ItemManager.createItem(Material.REDSTONE, 1, 0, "§cTrails", lore));
+                profil.setItem(3 + 9, ItemManager.createItem(Material.LEATHER_CHESTPLATE, 1, 0, "§9Kleiderschrank", lore));
+                profil.setItem(5 + 9, ItemManager.createItem(Material.PUMPKIN, 1, 0, "§eKöpfe", lore));
+                profil.setItem(7 + 9, ItemManager.createItem(Material.GOLD_BOOTS, 1, 0, "§6Schuhe", lore));
+                p.playSound(p.getLocation(), Sound.WOOD_CLICK, 0.5f, 0.8f);
+            }, 14);
+        }
+        p.openInventory(profil);
     }
 }

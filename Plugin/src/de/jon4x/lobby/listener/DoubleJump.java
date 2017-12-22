@@ -1,5 +1,6 @@
 package de.jon4x.lobby.listener;
 
+import de.jon4x.lobby.api.DoublejumpAPI;
 import de.jon4x.lobby.main;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -19,7 +20,7 @@ public class DoubleJump implements Listener {
             p.setAllowFlight(true);
             return;
         }
-        if (main.getInstance().getDoubleJump().contains(p.getUniqueId())) {
+        if (DoublejumpAPI.getState(p.getUniqueId().toString()) == 1) {
             p.setAllowFlight(false);
             return;
         }
@@ -31,7 +32,7 @@ public class DoubleJump implements Listener {
     @EventHandler
     public void onToggleFlight (PlayerToggleFlightEvent e) {
         Player p = e.getPlayer();
-        if (p.getGameMode() == GameMode.CREATIVE || main.getInstance().getDoubleJump().contains(p.getUniqueId()) || main.getInstance().getFlyList().contains(p.getUniqueId())) {
+        if (p.getGameMode() == GameMode.CREATIVE || DoublejumpAPI.getState(p.getUniqueId().toString()) == 1 || main.getInstance().getFlyList().contains(p.getUniqueId())) {
             return;
         }
         e.setCancelled(true);

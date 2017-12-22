@@ -11,3 +11,8 @@ commands:
    build:
       permission: admin
       description: Set your BuildMode!
+   coins:
+      description: Add coins
+      aliases: addcoins
+   getpos:
+      description: Get Position

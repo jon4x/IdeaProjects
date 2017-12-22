@@ -47,23 +47,28 @@ public class Teleporter implements Listener {
                     if (i.getType() == Material.AIR)
                         return;
 
-                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§e§lSpawn")) {
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§b§lSpawn")) {
                         doTeleport(main.getInstance().getSpawn(), p);
                     }
-
-                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eBed Wars")) {
-                        p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
-                        p.closeInventory();
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eBedWars")) {
+                        doTeleport(main.getInstance().getBedWars(), p);
                     }
                     else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eKnockout")) {
-                        p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
-                        p.closeInventory();
+                        doTeleport(main.getInstance().getKnockout(), p);
+                    }
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§eQSG")) {
+                        doTeleport(main.getInstance().getQSG(), p);
+                    }
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§6Tägliche Belohnung")) {
+                        doTeleport(main.getInstance().getDaily(), p);
+                    }
+                    else if (i.getItemMeta().getDisplayName().equalsIgnoreCase("§6Team")) {
+                        doTeleport(main.getInstance().getTeam(), p);
                     }
                     else if (i.getType() == Material.BARRIER) {
                         p.playSound(p.getLocation(), Sound.ANVIL_LAND, 0.5f, 0.1f);
                         p.closeInventory();
                     }
-
                 }
             }
 

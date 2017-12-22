@@ -2,6 +2,7 @@ package de.jon4x.lobby.listener;
 
 import de.jon4x.lobby.main;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -53,7 +54,7 @@ public class Protect implements Listener {
 
     @EventHandler
     public void onInvInteract (InventoryClickEvent e) {
-        Player p = Bukkit.getPlayerExact(e.getWhoClicked().getName());
+        Player p = (Player) e.getWhoClicked();
         if (main.getInstance().getBuildList().contains(p.getUniqueId())) {
             e.setCancelled(false);
         } else
@@ -122,6 +123,14 @@ public class Protect implements Listener {
     @EventHandler
     public void onBead (PlayerBedEnterEvent e) {
         e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInteractAt(PlayerInteractAtEntityEvent e) {
+        Player p = e.getPlayer();
+        if (!main.getInstance().getBuildList().contains(p.getUniqueId())) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler

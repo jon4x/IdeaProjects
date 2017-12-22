@@ -1,5 +1,7 @@
 package de.jon4x.lobby.listener;
 
+import de.jon4x.lobby.api.JumppadAPI;
+import de.jon4x.lobby.main;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -14,10 +16,12 @@ public class JumpPads implements Listener {
     @EventHandler
     public void onMove (PlayerMoveEvent e) {
         Player p = e.getPlayer();
-        if (p.getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.GOLD_BLOCK) {
-            p.setVelocity(p.getLocation().getDirection().multiply(3.0).setY(1.1));
-            p.playSound(p.getLocation(), Sound.LAVA_POP, 0.2f, 0.8f);
-            p.getWorld().playEffect(p.getLocation().subtract(0, 1.5, 0), Effect.MOBSPAWNER_FLAMES, 1);
+        if (JumppadAPI.getState(p.getUniqueId().toString()) == 0 || p.getLocation() != main.getInstance().getSpawn()) {
+            if (p.getLocation().getBlock().getType() == Material.IRON_PLATE) {
+                p.setVelocity(p.getLocation().getDirection().multiply(3.0).setY(1.1));
+                p.playSound(p.getLocation(), Sound.FIZZ, 0.3f, 1.5f);
+                p.getWorld().playEffect(p.getLocation().subtract(0, 1.5, 0), Effect.MOBSPAWNER_FLAMES, 1);
+            }
         }
     }
 }
